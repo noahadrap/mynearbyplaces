@@ -48,11 +48,6 @@ code {
   align-items: center;
 }
 
-.card{
-  background-color: lightblue;
-  width: 200px;
-  margin-bottom: 10ch;
-}
 
 .card-img-top {
   width: 200px;
