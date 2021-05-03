@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import {useHistory} from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import business from "./data";
+import api from "../communication/api"
 
 function Add (props) {
     const history = useHistory();
@@ -11,6 +12,7 @@ function Add (props) {
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
     const [address, setAddress] = useState('');
+    const [message, setMessage] = useState('');
 
    
     let onNameChange = (event) => {
@@ -24,8 +26,17 @@ function Add (props) {
     let onImageChange = (event) => {
         setImage(event.target.value)
     }
-    function handleAdd() {
-        business.push({id: business.length, name, image, address});
+    let handleAdd = () => {
+        let place = {name: name, address: address, image: image}
+        console.log(place.name);
+        api.savePlace(place)
+        .then(() => {console.log(`The place ${name} was added successfully`);
+        setName('');
+        setAddress('');
+        setImage('');
+        })
+        .catch(e => {console.log(e); setMessage (`There was an error in adding the place ${name}`);});
+        console.log(message);
         history.push('/');
     }
     return (

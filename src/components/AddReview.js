@@ -5,6 +5,7 @@ import {useHistory} from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import business from "./data";
 import reviews from "./reviews";
+import api from "../communication/api"
 
 function AddReview (props) {
     const history = useHistory();
@@ -13,6 +14,7 @@ function AddReview (props) {
     const [review, setReview] = useState('');
     const [business, setBusiness] = useState('');
     const [rating, setRating] = useState('');
+    const [message, setMessage] = useState('');
 
    
     let onNameChange = (event) => {
@@ -31,7 +33,17 @@ function AddReview (props) {
     }
 
     function handleAdd() {
-        reviews.push({id: reviews.length, name, business, review, rating});
+        let newReview = {name: name, business: business, review : review, rating : rating}
+        console.log(newReview.name);
+        api.saveReviews(newReview)
+        .then(() => {console.log(`The review by ${name} was added successfully`);
+        setName('');
+        setBusiness('');
+        setReview('');
+        setRating('');
+        })
+        .catch(e => {console.log(e); setMessage (`There was an error in adding the review by ${name}`);});
+        console.log(message);
         history.push('/');
     }
     return (

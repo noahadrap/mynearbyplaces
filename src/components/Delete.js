@@ -5,19 +5,25 @@ import {useHistory} from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import business from "./data";
 import {Link, useLocation} from "react-router-dom";
-
+import api from "../communication/api"
 
 function Delete (props) {
     let location = useLocation();
     const history = useHistory();
-    function handleDelete() {
-    for (var i=0; i<business.length;i++) {
-        if (location.state.id === business[i].id) {
-            business.splice(i, 1);
-        }
+    const [message, setMessage] = useState('');
+
+    let handleDelete = () => {
+        let place = {id : location.state.id}
+        console.log(place.id)
+        api.deletePlace(place)
+        .then(() => {console.log(`The place ${place.id} was added successfully`);
+        })
+        .catch(e => {console.log(e); setMessage (`There was an error in adding the place ${place.id}`);});
+        console.log(message);
+        history.push('/');
     }
-    history.push('/');
-}
+    
+
     return (
         <Row><Col>
         <Form onSubmit={handleDelete}>

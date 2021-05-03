@@ -5,6 +5,7 @@ import {useHistory} from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import business from "./data";
 import {Link, useLocation} from "react-router-dom";
+import api from "../communication/api"
 
 function Edit (props) {
     const history = useHistory();
@@ -13,6 +14,7 @@ function Edit (props) {
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
     const [address, setAddress] = useState('');
+    const [message, setMessage] = useState('');
     
 
    
@@ -28,13 +30,16 @@ function Edit (props) {
         setImage(event.target.value)
     }
     function handleEdit() {
-        for (var i=0; i<business.length;i++) {
-            if (location.state.id === business[i].id) {
-                business[i].name = name;
-                business[i].address = address;
-                business[i].image = image;
-            }
-        }
+        let place = {name: name, address: address, image: image, id: location.state.id}
+        console.log(place.name);
+        api.editPlace(place)
+        .then(() => {console.log(`The place ${name} was added successfully`);
+        setName('');
+        setAddress('');
+        setImage('');
+        })
+        .catch(e => {console.log(e); setMessage (`There was an error in adding the place ${name}`);});
+        console.log(message);
         history.push('/');
     }
     return (
