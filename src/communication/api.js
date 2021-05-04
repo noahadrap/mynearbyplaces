@@ -28,7 +28,7 @@ let saveReviews = (place) => {
         },
         body: JSON.stringify(place)
     });
-}
+} 
 
 let deletePlace = (place) => {
     return fetch(apiHost + '/deletePlace', {
