@@ -34,4 +34,4 @@ function NavigationBar (props) {
     );
 }
 
-export default NavigationBar;
+export default NavigationBar; 

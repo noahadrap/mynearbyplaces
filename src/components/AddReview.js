@@ -30,7 +30,7 @@ function AddReview (props) {
     }
     let onRatingChange = (event) => {
         setRating(event.target.value)
-    }
+    }  
 
     function handleAdd() {
         let newReview = {name: name, business: business, review : review, rating : rating}

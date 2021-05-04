@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import {useHistory} from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import business from "./data";
-import api from "../communication/api"
+import api from "../communication/api" 
 
 function Add (props) {
     const history = useHistory();

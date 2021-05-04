@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import business from "./data";
 import {Link, useLocation} from "react-router-dom";
 import api from "../communication/api"
-
+ 
 function Edit (props) {
     const history = useHistory();
     let location = useLocation();
